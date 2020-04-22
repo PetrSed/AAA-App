@@ -1,54 +1,100 @@
+import java.io.Closeable
+import java.io.File
+import java.sql.Connection
+import java.sql.DriverManager
+import org.apache.logging.log4j.LogManager
+import org.flywaydb.core.Flyway
 import domains.*
-import Handler
-
-class Wrapper {
-    var users = mutableListOf<User>(
-        User(login = "admin", hash = "21232f297a57a5a743894a0e4a801fc3"),
-        User(login = "petr", hash = "5685dc8ca490fb3399ed2ddeb5faddca"),
-        User(login = "vasya", hash = "202cb962ac59075b964b07152d234b70"),
-        User(login = "q", hash = "3a4d92a1200aad406ac50377c7d863aa")
-    )
-        private set
 
 
-    var resources = mutableListOf<Resource>(
-        Resource(res = "A", login = "vasya", role = Role.valueOf("READ")),
-        Resource(res = "A.B", login = "admin", role = Role.valueOf("EXECUTE")),
-        Resource(res = "A.B.C", login = "petr", role = Role.valueOf("WRITE")),
-        Resource(res = "A.B.D", login = "q", role = Role.valueOf("READ")),
-        Resource(res = "A.BB", login = "petr", role = Role.valueOf("EXECUTE")),
-        Resource(res = "AB", login = "admin", role = Role.valueOf("WRITE")),
-        Resource(res = "A", login = "admin", role = Role.valueOf("READ"))
-    )
-        private set
+class Wrapper : Closeable {
+    private var con: Connection? = null
+    private val logger = LogManager.getLogger()
 
-    var sessions: MutableList<Session> = mutableListOf()
+    fun dbExists(): Boolean = File("aaa.h2.db").exists()
 
-    fun addSession(session: Session) = sessions.add(session)
-    fun loginExists(login: String): Boolean = users.find{it.login == login} != null
-    fun getUser(login: String) = users.first { it.login == login }
-    fun getAccessResources(login: String): List<Resource> = resources.filter { it.login == login }
-    fun hasPermission(login: String, role: Role, prefix: String): Boolean {
-        val rights = getAccessResources(login)
-        val accessResult = getAccess(rights, prefix)
-        val access = accessResult.first
-        val roles = accessResult.second.distinct()
-        return (access && role in roles)
+    fun getUser(login: String): User {
+        logger.info("Get prepared statement with users")
+        val getUser = con!!.prepareStatement("SELECT hash FROM users WHERE login = ?")
+        getUser.setString(1, login)
+        logger.info("Get result set with user")
+        val res = getUser.executeQuery()
+        res.next()
+        val hash = res.getString("hash")
+        logger.info("Close result set with user")
+        res.close()
+        logger.info("Close prepared statement with users")
+        getUser.close()
+        return User(login, hash)
     }
-    }
-    private fun checkAccess(needResourceName: String, resourceName: String): Boolean =
-        needResourceName.startsWith(resourceName) || needResourceName == resourceName
 
-    private fun getAccess(resources: List<Resource>, needResourceName: String): Pair<Boolean, MutableList<Role>> {
-        var access = false
-        val roles = mutableListOf<Role>()
-        for (resource in resources) {
-            val resourceName = resource.res
-            if (checkAccess(needResourceName, resourceName)) {
-                access = true
-                val role = resource.role
-                roles.add(role)
-            }
-        }
-        return Pair(access, roles)
+    @Suppress("MagicNumber")
+    fun hasPermission(login: String, role: String, permissionRegex: String): Boolean {
+        logger.info("Get prepared statement with permission")
+        val getPermission = con!!.prepareStatement(
+            "SELECT count(*) FROM permissions WHERE login = ? and role = ? and res REGEXP ?"
+        )
+        getPermission.setString(1, login)
+        getPermission.setString(2, role)
+        logger.info("Matching resources against '$permissionRegex'")
+        getPermission.setString(3, permissionRegex)
+        logger.info("Get result set with permission")
+        val res = getPermission.executeQuery()
+        res.next()
+        val ans = res.getInt(1) > 0
+        logger.info("Close result set with permission")
+        res.close()
+        logger.info("Close prepared statement with permission")
+        getPermission.close()
+        return ans
     }
+
+    @Suppress("MagicNumber") // Will be fixed later. Maybe
+    fun addSession(activity: Session) {
+        logger.info("Get prepared statement with activities")
+        val addAct = con!!.prepareStatement(
+            "INSERT INTO " +
+                    "sessions(login, role, ds, de, vol, res) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)"
+        )
+        addAct.setString(1, activity.login)
+        addAct.setString(2, activity.role)
+        addAct.setString(3, activity.dateStart)
+        addAct.setString(4, activity.dateEnd)
+        addAct.setString(5, activity.vol)
+        addAct.setString(6, activity.res)
+        addAct.execute()
+        logger.info("Close prepared statement with activities")
+        addAct.close()
+    }
+
+    fun loginExists(login: String): Boolean {
+        logger.info("Get prepared statement with user")
+        val getUser = con!!.prepareStatement("SELECT count(*) FROM users WHERE login = ?")
+        getUser.setString(1, login)
+        logger.info("Get result set with user")
+        val res = getUser.executeQuery()
+        res.next()
+        val ans = res.getInt(1) > 0
+        logger.info("Close result set with user")
+        res.close()
+        logger.info("Close prepared statement with user")
+        getUser.close()
+        return ans
+    }
+
+    fun initDatabase(url: String, login: String, pass: String) {
+        val flyway = Flyway.configure().dataSource("$url;MV_STORE=FALSE", login, pass).locations("filesystem:db").load()
+        flyway.migrate()
+    }
+
+    fun connect(url: String, login: String, pass: String) {
+        logger.info("Сonnecting to database")
+        con = DriverManager.getConnection(url, login, pass)
+    }
+
+    override fun close() {
+        logger.info("Disconnecting from database")
+        con?.close()
+    }
+}

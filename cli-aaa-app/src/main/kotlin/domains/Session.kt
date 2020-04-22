@@ -4,7 +4,14 @@ import java.time.LocalDate
 import kotlin.system.exitProcess
 import ExitCodes.*
 
-data class Session(val dateStart: String, val dateEnd: String, val vol: String, val res: String) {
+data class Session(
+    val login: String,
+    val role: String,
+    val dateStart: String,
+    val dateEnd: String,
+    val vol: String,
+    val res: String
+) {
     var formattedDateStart: LocalDate = LocalDate.now()
         private set
     var formattedDateEnd: LocalDate = LocalDate.now()

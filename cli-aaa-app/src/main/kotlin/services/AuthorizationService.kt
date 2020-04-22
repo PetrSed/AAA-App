@@ -10,6 +10,6 @@ class AuthorizationService(private val wrapper: Wrapper) {
         while (resRegex.contains(Regex("(?<=[A-Z])(\\.[A-Z]+[^)\\s]*)")))
             resRegex = resRegex.replace(Regex("(?<=[A-Z])(\\.[A-Z]+[^)\\s]*)"), "(\\\\$1)?")
         resRegex = "^$resRegex$"
-        if (wrapper.hasPermission(resource.login, resource.role, resRegex)) return -1 else return NoAccess.code
+        if (wrapper.hasPermission(resource.login, resource.role.toString(), resRegex)) return -1 else return NoAccess.code
     }
 }
