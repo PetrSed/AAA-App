@@ -1,0 +1,7 @@
+INSERT INTO users VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3');
+
+INSERT INTO users VALUES ('petr', '5685dc8ca490fb3399ed2ddeb5faddca');
+
+INSERT INTO users VALUES ('vasya', '202cb962ac59075b964b07152d234b70');
+
+INSERT INTO users VALUES ('q', '3a4d92a1200aad406ac50377c7d863aa');
