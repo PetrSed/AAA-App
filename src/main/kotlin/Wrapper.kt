@@ -13,7 +13,7 @@ class Wrapper : Closeable {
 
     fun dbExists(): Boolean = File("aaa.h2.db").exists()
 
-    fun getUser(login: String): User {
+    fun getUser(login: String): User? {
         logger.info("Get prepared statement with users")
         val getUser = con!!.prepareStatement("SELECT hash FROM users WHERE login = ?")
         getUser.setString(1, login)

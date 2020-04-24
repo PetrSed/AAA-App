@@ -11,23 +11,23 @@ class AuthenticationService(val wrapper: Wrapper) {
         if (!checkLoginValidity(login)) {
             return InvalidLoginFormat.code
         }
-        if (checkLoginPresenceInBase(login, wrapper)) {
+        if (checkLoginPresenceInBase(login)) {
             return UnknownLogin.code
         }
         val nowHash = getPasswordHash(password)
         val user = getUser(login, wrapper)
-        if (!checkPasswordsHashs(user.hash, nowHash)) {
+        if (!checkPasswordsHashs(user!!.hash, nowHash)) {
             return InvalidPassword.code
         }
 
         return -1
     }
 
-    private fun checkLoginValidity(login: String): Boolean = login.matches(Regex("[a-z]{1,10}"))
-    private fun checkLoginPresenceInBase(login: String, wrapper: Wrapper): Boolean = wrapper.loginExists(login)
-    private fun getUser(login: String, wrapper: Wrapper): User = wrapper.getUser(login)
-    private fun getPasswordHash(password: String): String = password.md5()
-    private fun checkPasswordsHashs(baseHash: String, nowHash: String): Boolean = baseHash == nowHash
+    fun checkLoginValidity(login: String): Boolean = login.matches(Regex("[a-z]{1,10}"))
+    fun checkLoginPresenceInBase(login: String): Boolean = wrapper.loginExists(login)
+    fun getUser(login: String, wrapper: Wrapper): User? = wrapper.getUser(login)
+    fun getPasswordHash(password: String): String = password.md5()
+    fun checkPasswordsHashs(baseHash: String, nowHash: String): Boolean = baseHash == nowHash
 
 
     private fun String.md5(): String {
