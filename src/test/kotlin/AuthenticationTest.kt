@@ -43,12 +43,12 @@ object AuthenticationTest : Spek({
         }
         Scenario("Getting the hash and verifying the password") {
             Then("Correct password") {
-                val nowHash = authenService.getPasswordHash("petr")
+                val nowHash = authenService.getPasswordHash("petr101")
                 assertTrue(authenService.checkPasswordsHashs("5685dc8ca490fb3399ed2ddeb5faddca", nowHash))
             }
             Then("Incorrect password") {
                 val nowHash = authenService.getPasswordHash("petr1")
-                assertTrue(authenService.checkPasswordsHashs("5685dc8ca490fb3399ed2ddeb5faddca", nowHash))
+                assertFalse(authenService.checkPasswordsHashs("5685dc8ca490fb3399ed2ddeb5faddca", nowHash))
             }
         }
     }
