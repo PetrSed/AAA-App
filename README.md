@@ -1,7 +1,7 @@
-# [CLI-Auth-App](https://github.com/PetrSed/CLI-Auth-App)
-[![Build Status](https://api.travis-ci.org/PetrSed/CLI-Auth-App.svg?branch=master)](https://travis-ci.org/PetrSed/CLI-Auth-App)
+# [AAA-App](https://github.com/PetrSed/AAA-App)
+[![Build Status](https://api.travis-ci.org/PetrSed/AAA-App.svg?branch=master)](https://travis-ci.org/PetrSed/AAA-App)
 
-Это учебный проект, консольная утилита, моделирующая процесс [Аутентификации, Авторизации и Аккаунтинга пользователя](https://ru.wikipedia.org/wiki/AAA_(информационная_безопасность)).
+Это учебный проект, консольная утилита, моделирующая процесс аутентификации, авторизации и аккаунтинга пользователя.
 
 #### Приложение работает со следующим списком аргументов
 
