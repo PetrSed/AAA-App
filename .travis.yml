@@ -2,3 +2,5 @@ dist: xenial
 language: java
 compiler: kotlinc
 before_install: sudo snap install --classic kotlin
+script:
+  - ./gradlew build 
