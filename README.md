@@ -19,28 +19,28 @@
 # Roadmaps
 В приложении реализованы четыре [набора требований](./docs/requirements.md).
 
-1. [План работ по набору первому требований #1](./docs/ROADMAP1.md)
-2. [План работ по набору второму требований #2](./docs/ROADMAP2.md)
-3. [План работ по набору третьему требований #3](./docs/ROADMAP3.md)
-3. [План работ по набору чертвёртому требований #4](./docs/ROADMAP4.md)
+1. [План работ по первому требований](./docs/ROADMAP1.md)
+2. [План работ по второму требований](./docs/ROADMAP2.md)
+3. [План работ по третьему требований](./docs/ROADMAP3.md)
+3. [План работ по чертвёртому требований](./docs/ROADMAP4.md)
 
 # Build & Run application
 ## Build jar
 1. Склонировать репозиторий
 2. Запустить скрипт сборки — `build.sh`
 ```bash
-./scripts/build.sh
+./gradlew build
 ```
 
 
 ## Run
 Запустить скрипт `run.sh`
 ```bash
-scripts/run.sh -key value
+./gradlew build
 ```
 
 ## Test
 Запустить скрипт `test.sh`
 ```bash
-./scripts/test.sh
+./gradlew test
 ```
