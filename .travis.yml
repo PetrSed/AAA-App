@@ -6,7 +6,7 @@ install:
     - chmod +x ./scripts/test.sh
 
 before_script:
-    - ./gradlew shadowJar
+    - ./gradlew build
 
 script:
     - ./scripts/test.sh
