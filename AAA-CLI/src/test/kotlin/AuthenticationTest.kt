@@ -5,7 +5,6 @@ import kotlin.test.assertTrue
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import services.AuthenticationService
-import Wrapper
 import domains.User
 
 object AuthenticationTest : Spek({

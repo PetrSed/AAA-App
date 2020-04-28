@@ -1,6 +1,4 @@
-import org.apache.logging.log4j.LogManager
 import kotlin.system.exitProcess
-import ExitCodes.*
 
 fun main(args: Array<String>){
     val app = App()

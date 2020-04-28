@@ -1,2 +1,2 @@
 rootProject.name = 'aaa-app'
-
+include 'AAA-CLI'
