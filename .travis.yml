@@ -1,4 +1,12 @@
-dist: xenial
 language: java
-compiler: kotlinc
-before_install: sudo snap install --classic kotlin
+
+install:
+    - sudo snap install --classic kotlin
+    - chmod +x gradlew
+    - chmod +x ./scripts/test.sh
+
+before_script:
+    - ./gradlew build
+
+script:
+    - ./scripts/test.sh
