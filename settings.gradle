@@ -1,2 +1,3 @@
 rootProject.name = 'aaa-app'
-include 'AAA-CLI'
+include 'CLI'
+include 'WEB'

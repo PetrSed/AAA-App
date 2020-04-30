@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="AuthenticationTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2020-04-28T15:11:02" hostname="PetrSedPC" time="0.128">
+  <properties/>
+  <testcase name="Then: Valid format" classname="AuthenticationTest" time="0.049"/>
+  <testcase name="Then: Invalid format" classname="AuthenticationTest" time="0.003"/>
+  <testcase name="Then: Login is presence in the database" classname="AuthenticationTest" time="0.049"/>
+  <testcase name="Then: Login is not presence in the database" classname="AuthenticationTest" time="0.011"/>
+  <testcase name="Then: Correct password" classname="AuthenticationTest" time="0.011"/>
+  <testcase name="Then: Incorrect password" classname="AuthenticationTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
