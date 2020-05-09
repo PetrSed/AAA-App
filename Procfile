@@ -1,1 +1,1 @@
-web: gradlew jar; java -Dserver.port=$PORT $JAVA_OPTS -jar WEB/build/libs/WEB.jar
+web: java -jar build/server/webapp-runner-*.jar build/libs/*.war
