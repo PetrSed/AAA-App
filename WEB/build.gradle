@@ -6,6 +6,7 @@ plugins {
 }
 configurations.create('download')
 dependencies {
+    compile 'com.github.jsimone:webapp-runner:8.5.11.3'
     implementation 'javax:javaee-api:7.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     download 'org.eclipse.jetty:jetty-runner:9.4.9.v20180320'
@@ -36,11 +37,3 @@ task copyToLib(type: Copy) {
 }
 
 stage.dependsOn(copyToLib)
-
-
-gradle.taskGraph.whenReady {
-    taskGraph ->
-        if (taskGraph.hasTask(stage)) {
-            test.enabled = false
-        }
-}
