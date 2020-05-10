@@ -14,7 +14,7 @@ class PostServlet : HttpServlet() {
     @Throws(ServletException::class, IOException::class)
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
         val input = request.getParameter("input")
-        response.sendRedirect("/WEB/echo/get?id=$input")
+        response.sendRedirect("/echo/get?id=$input")
     }
 
 }
