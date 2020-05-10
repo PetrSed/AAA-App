@@ -1,1 +1,1 @@
-web: java -jar WEB/build/server/jetty-runner-*.jar --port $PORT WEB/build/libs/*.war
+web: java -jar WEB/build/server/jetty-runner-9.4.9.v20180320.jar --port $PORT WEB/build/libs/*.war
