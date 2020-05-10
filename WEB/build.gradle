@@ -1,7 +1,7 @@
 plugins {
     id 'war'
     id 'org.gretty' version '3.0.1'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+    id 'org.jetbrains.kotlin.jvm' version 
     id "com.heroku.sdk.heroku-gradle" version "1.0.4"
 }
 configurations.create('download')
