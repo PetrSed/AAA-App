@@ -13,21 +13,17 @@
 
 # Build & Run application
 ## Build 
-1. Склонировать репозиторий
-2. Запустить скрипт сборки — `build.sh`
 ```bash
 ./gradlew build
 ```
 
 
 ## Run
-Запустить скрипт `run.sh`
 ```bash
 ./gradlew appRun
 ```
 
 ## Test
-Запустить скрипт `test.sh`
 ```
 Testing is performed automatically when the project is built
 ```
