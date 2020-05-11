@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import java.net.URLEncoder.encode
+import com.google.inject.Singleton
 
 
-@WebServlet(name = "UserServlet", urlPatterns = ["/ajax/user"])
+@Singleton
 class UserServlet : HttpServlet() {
     override fun service(request: HttpServletRequest, response: HttpServletResponse) {
         response.writer.print("Hello, world!")

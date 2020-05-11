@@ -7,9 +7,10 @@ import javax.servlet.annotation.WebServlet
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import com.google.inject.Singleton
 
 
-@WebServlet(name = "GetServlet", urlPatterns = ["echo/get"])
+@Singleton
 class GetServlet : HttpServlet() {
     @Throws(ServletException::class, IOException::class)
     override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
