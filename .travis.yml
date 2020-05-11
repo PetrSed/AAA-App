@@ -1,6 +1,7 @@
 language: java
 
-before script:
-  - git update-index --chmod=+x gradlew
-
-script: ./gradlew build
+install:
+  - chmod +x gradlew
+before_script:
+  - ./gradlew build
+script: ./gradlew test
