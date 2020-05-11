@@ -30,4 +30,4 @@
 ```bash
 ./gradlew test
 ```
-## [WebApp on Heroku](http://testtaskaaa.herokuapp.com)
+## [WebApp on Heroku](https://web-aaa-app.herokuapp.com/)
