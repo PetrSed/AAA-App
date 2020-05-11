@@ -1,12 +1,10 @@
 language: java
 
-install:
-    - sudo snap install --classic kotlin
-    - chmod +x gradlew
-    - chmod +x ./scripts/test.sh
+jobs:
+    include:
+        - stage: "Build"
+          install: skip
+          script: ./gradlew build
+        - stage: "Test"
+          script: ./gradlew test
 
-before_script:
-    - ./gradlew build
-
-script:
-    - ./scripts/test.sh
