@@ -3,8 +3,8 @@ package services
 import Wrapper
 import domains.Session
 
-class AccountingService(val wrapper: Wrapper){
-    fun accounting(session: Session): Int{
+class AccountingService(val wrapper: Wrapper) {
+    fun accounting(session: Session): Int {
         addActivity(session)
         return -1
     }

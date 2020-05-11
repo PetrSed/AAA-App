@@ -1,8 +1,8 @@
 package services
 
 import Wrapper
-import domains.*
-import ExitCodes.*
+import domains.Resource
+import ExitCodes.NoAccess
 
 class AuthorizationService(private val wrapper: Wrapper) {
     fun authorize(resource: Resource): Int {

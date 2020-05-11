@@ -1,8 +1,10 @@
 package services
 
 import Wrapper
-import ExitCodes.*
-import domains.*
+import ExitCodes.InvalidLoginFormat
+import ExitCodes.InvalidPassword
+import ExitCodes.UnknownLogin
+import domains.User
 import java.math.BigInteger
 import java.security.MessageDigest
 
@@ -28,12 +30,8 @@ class AuthenticationService(val wrapper: Wrapper) {
     fun getUser(login: String, wrapper: Wrapper): User? = wrapper.getUser(login)
     fun getPasswordHash(password: String): String = password.md5()
     fun checkPasswordsHashs(baseHash: String, nowHash: String): Boolean = baseHash == nowHash
-
-
     private fun String.md5(): String {
         val md = MessageDigest.getInstance("MD5")
         return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32, '0')
     }
 }
-
-

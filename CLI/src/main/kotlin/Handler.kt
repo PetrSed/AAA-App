@@ -1,5 +1,7 @@
 import kotlin.system.exitProcess
-import ExitCodes.*
+import ExitCodes.HelpCode
+import ExitCodes.SuccessCode
+import ExitCodes.UnknownRole
 import services.HelpService
 
 class Handler(args: Array<String>) {

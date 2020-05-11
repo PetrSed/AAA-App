@@ -2,7 +2,7 @@ package domains
 
 import java.time.LocalDate
 import kotlin.system.exitProcess
-import ExitCodes.*
+import ExitCodes.IncorrectActivity
 
 data class Session(
     val login: String,

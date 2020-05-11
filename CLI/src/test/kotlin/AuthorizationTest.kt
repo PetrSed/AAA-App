@@ -3,9 +3,10 @@ import io.mockk.mockk
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 import services.AuthorizationService
-import domains.*
+import domains.Role
+import domains.Resource
 import kotlin.test.assertEquals
-import ExitCodes.*
+import ExitCodes.NoAccess
 
 object AuthorizationTest : Spek({
 
@@ -15,7 +16,6 @@ object AuthorizationTest : Spek({
         every { hasPermission("petr!", "EXECUTE", "^A(\\.BB)?\$") } answers { false }
         every { hasPermission("petr", "EXECUTE", "^A(\\.BB.С)?\$" ) } answers { true }
         every { hasPermission("petr", "EXECUTE", "^A\$" ) } answers { false }
-
     }
 
     val authorService = AuthorizationService(wrapper)
@@ -41,5 +41,4 @@ object AuthorizationTest : Spek({
             }
         }
     }
-
 })

@@ -51,5 +51,4 @@ object AuthenticationTest : Spek({
             }
         }
     }
-
 })

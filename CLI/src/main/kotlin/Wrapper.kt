@@ -4,8 +4,8 @@ import java.sql.Connection
 import java.sql.DriverManager
 import org.apache.logging.log4j.LogManager
 import org.flywaydb.core.Flyway
-import domains.*
-
+import domains.User
+import domains.Session
 
 class Wrapper : Closeable {
     private var con: Connection? = null
