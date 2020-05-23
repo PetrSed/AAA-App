@@ -10,6 +10,7 @@ import com.google.inject.Singleton
 
 
 @Singleton
+@WebServlet(name = "EchoServlet", urlPatterns = ["echo/*"])
 class EchoServlet : HttpServlet() {
     @Throws(ServletException::class, IOException::class)
     override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {

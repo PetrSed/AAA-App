@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse
 import java.net.URLEncoder.encode
 import com.google.inject.Singleton
 
-
 @Singleton
+@WebServlet(name = "PostServlet", urlPatterns = ["echo/post"])
 class PostServlet : HttpServlet() {
     @Throws(ServletException::class, IOException::class)
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
         val input = request.getParameter("input")
-        response.sendRedirect("get?id=${encode(input, Charsets.UTF_8.toString())}")
+        response.sendRedirect("get?id=${encode(input, "utf-8")}")
     }
 
 }

@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import com.google.inject.Singleton
 
-
 @Singleton
+@WebServlet(name = "GetServlet", urlPatterns = ["echo/get"])
 class GetServlet : HttpServlet() {
-    @Throws(ServletException::class, IOException::class)
     override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
         val id = request.getParameter("id")
+        print(id)
         request.setAttribute("id", id)
         request.getRequestDispatcher("../response.jsp").forward(request, response)
     }
